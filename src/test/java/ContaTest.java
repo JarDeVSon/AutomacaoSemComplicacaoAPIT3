@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,7 +5,6 @@ import transferencia.Cliente;
 import transferencia.Conta;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class ContaTest {
     Cliente xuxa;
@@ -22,9 +20,40 @@ public class ContaTest {
     }
 
     @Test
+    void getProprietarioXuxa() {
+        assertEquals(xuxa, contaXuxa.getProprietario());
+    }
+
+    @Test
+    void getAgenciaXuxa() {
+        assertEquals("0025", contaXuxa.getAgencia());
+    }
+
+    @Test
+    void getNumeroContaXuxa() {
+        assertEquals("2254", contaXuxa.getNumeroConta());
+    }
+
+    @Test
+    void getSaldoXuxa() {
+        assertEquals(2500, contaXuxa.getSaldo());
+    }
+
+
+    @Test
+    void realizarDeposito() {
+        contaXuxa.realizarDeposito(1000);
+        assertEquals(3500, contaXuxa.getSaldo());
+    }
+
+    @Test
+    void realizarSaque() {
+        contaXuxa.realizarSaque(1000);
+        assertEquals(1500, contaXuxa.getSaldo());
+    }
+    @Test
     @DisplayName("Realizar transação válida")
     public void realizarTransacao(){
-
         contaXuxa.realizarTransferencia(1000, contaSilvio);
         assertEquals(1500, contaXuxa.getSaldo(),"Saldo da conta Xuxa incorreto");
         assertEquals(4500, contaSilvio.getSaldo(),"Saldo da conta Silvio incorreto");
@@ -32,9 +61,27 @@ public class ContaTest {
     @Test
     @DisplayName("Realizar transação inválida")
     public void realizarTransacaoInvalida(){
-
         contaXuxa.realizarTransferencia(2501, contaSilvio);
         assertEquals(2500, contaXuxa.getSaldo(),"Saldo da conta Xuxa");
         assertEquals(3500, contaSilvio.getSaldo(),"Saldo da conta Silvio");
+    }
+    @Test
+    void getProprietarioSilvio() {
+        assertEquals(silvioSantos, contaSilvio.getProprietario());
+    }
+
+    @Test
+    void getAgenciaSilvio() {
+        assertEquals("0026", contaSilvio.getAgencia());
+    }
+
+    @Test
+    void getNumeroContaSilvio() {
+        assertEquals("2251", contaSilvio.getNumeroConta());
+    }
+
+    @Test
+    void getSaldoSilvio() {
+        assertEquals(3500, contaSilvio.getSaldo());
     }
 }
