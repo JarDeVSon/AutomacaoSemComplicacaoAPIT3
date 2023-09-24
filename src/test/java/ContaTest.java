@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import transferencia.Cliente;
 import transferencia.Conta;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ContaTest {
     Cliente xuxa;
@@ -17,6 +17,18 @@ public class ContaTest {
         silvioSantos = new Cliente("Silvio Santos","12345678999","9876543222");
         contaXuxa = new Conta("0025", "2254", 2500, xuxa);
         contaSilvio = new Conta("0026", "2251", 3500, silvioSantos);
+    }
+    @Test
+    public void getNome() {
+       assertEquals("Xuxa", xuxa.getNome());
+    }
+    @Test
+    public void getCpf() {
+         assertEquals("12345678909", xuxa.getCpf());
+    }
+    @Test
+    public void getRg() {
+         assertEquals("9876543211", xuxa.getRg());
     }
 
     @Test
@@ -61,7 +73,8 @@ public class ContaTest {
     @Test
     @DisplayName("Realizar transação inválida")
     public void realizarTransacaoInvalida(){
-        contaXuxa.realizarTransferencia(2501, contaSilvio);
+        boolean resultado = contaXuxa.realizarTransferencia(2501, contaSilvio);
+        assertFalse(resultado);
         assertEquals(2500, contaXuxa.getSaldo(),"Saldo da conta Xuxa");
         assertEquals(3500, contaSilvio.getSaldo(),"Saldo da conta Silvio");
     }
